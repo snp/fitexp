@@ -30,6 +30,11 @@ getTargets <- function(data, cell_rx, drug_rx, control_rx){
   data <- tbl_df(data)
   print(nrow(data))
   # LFQ data from MaxQuant
+  if(!("Reverse" %in% names(data)))
+    data$Reverse <- ''
+  if(!("Potential.contaminant" %in% names(data)))
+    data$Potential.contaminant <- ''
+  
   data %>%
     filter(Reverse != '+') %>%
     filter(Potential.contaminant!='+') %>% 
